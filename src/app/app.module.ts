@@ -4,17 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material.module'
+import { MaterialModule } from './shared/material.module';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
