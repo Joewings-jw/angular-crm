@@ -10,11 +10,11 @@ var database = {
 
 for (var i = 1; i<= 400; i++) {
   database.customers.push({
-    membership: "",
+    membership: faker.datatype.boolean(),
     mobile: faker.phone.phoneNumber(),
-    rewards: faker.helpers.mustache(),
+    rewards: faker.vehicle.model(),
     id: i,
-    first_name: faker.name.firstName,
+    first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
     email: faker.internet.email(),
     avatar: faker.internet.avatar()
