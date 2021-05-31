@@ -1,0 +1,67 @@
+<!-- <mat-sidenav-container> -->
+    <mat-card class='light' style="height: 100%;">
+
+        <mat-card-header>
+          <mat-card-title class="view-card-title">
+            <h1>{{page_title }}</h1>
+          </mat-card-title>
+        </mat-card-header>
+      
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="avatar">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let customer">
+              <!-- <a [routerLink]="['/customer', customer.id]"> -->
+              <img *ngIf='customer.avatar' [src]='customer.avatar' [title]='customer.first_name'
+                [style.width.px]='image_width' [style.margin.px]='image_margin'>
+              <!-- </a> -->
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="first_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+            <mat-cell *matCellDef="let customer"> {{customer.first_name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="last_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+            <mat-cell *matCellDef="let customer"> {{customer.last_name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let customer"> {{customer.email}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="rewards">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Rewards </mat-header-cell>
+            <mat-cell *matCellDef="let customer"> {{customer.rewards}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="membership">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Membershiop</mat-header-cell>
+            <mat-cell *matCellDef="let customer">
+              <span *ngIf="!customer.membership" style="color:green">
+                <mat-icon>check_circle</mat-icon>
+              </span>
+              <span *ngIf="customer.membership" style="color:darkgrey">
+                <mat-icon>highlight_off</mat-icon>
+              </span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef style="justify-content:right;">
+              <!-- <button mat-button style="color:white; background-color:darkgrey" (click)="resetListFilter()">Reset</button> -->
+            </mat-header-cell>
+            <mat-cell *matCellDef="let customer" style="justify-content:right;">
+              <button mat-mini-fab style="background-color:teal; min-height: 30px;   margin: 5px;"
+               >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab style="background-color:lightblue; min-height: 30px;  margin: 5px;"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10]">
+        </mat-paginator>
+    </mat-card>
