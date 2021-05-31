@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate": "node ./server/generate.js > ./server/database.json",
+    "server": "json-server --watch ./server/database.json"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +24,11 @@
     "@angular/platform-browser-dynamic": "~11.1.1",
     "@angular/router": "~11.1.1",
     "chart.js": "^2.9.3",
+    "faker": "^5.5.3",
+    "json-server": "^0.16.3",
     "ng2-charts": "^2.3.0",
     "rxjs": "~6.6.0",
+    "rxjs-compat": "^6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
@@ -32,6 +37,7 @@
     "@angular/cli": "~11.1.2",
     "@angular/compiler-cli": "~11.1.1",
     "@types/jasmine": "~3.6.0",
+    "@types/lodash": "^4.14.170",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
@@ -41,6 +47,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "lodash-es": "^4.17.21",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
