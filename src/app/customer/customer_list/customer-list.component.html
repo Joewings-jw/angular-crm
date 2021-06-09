@@ -33,15 +33,27 @@
 
     <!--=====================Table==================================-->
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="avatar">
+      <!-- <ng-container matColumnDef="avatar">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let customer">
           <!-- <a [routerLink]="['/customer', customer.id]"> -->
-          <img *ngIf='customer.avatar' [src]='customer.avatar' [title]='customer.first_name'
-            [style.width.px]='image_width' [style.margin.px]='image_margin'>
+          <!-- <img *ngIf='customer.avatar' [src]='customer.avatar' [title]='customer.first_name'
+            [style.width.px]='image_width' [style.margin.px]='image_margin'> --> -->
           <!-- </a> -->
+        <!-- </mat-cell>
+      </ng-container> -->
+
+      <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> avatar </mat-header-cell>
+        <mat-cell *matCellDef="let customer" >
+          <ng-container *ngFor="let i of [].constructor(customer.avatar)">
+            <img [src]="customer.avatar" [style.width.px]='image_width' [style.margin.px]='image_margin'/>
+          </ng-container>
+          <!-- <img srcset="customer.avatar" [title]='customer.first_name'
+            [style.width.px]='image_width' [style.margin.px]='image_margin'> -->
         </mat-cell>
       </ng-container>
+
       <ng-container matColumnDef="first_name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
         <mat-cell *matCellDef="let customer"> {{customer.first_name}} </mat-cell>
@@ -121,7 +133,8 @@
     <mat-divider></mat-divider>
     <mat-card-header>
       <mat-action-list>
-        <button mat-raised-button style="color:lightgrey; background-color:darkgreen; margin:5px;">
+        <button mat-raised-button style="color:lightgrey; background-color:darkgreen; margin:5px;"
+        (click)="searchCustomers(search_filter);sidenav.toggle()">
           <mat-icon>search</mat-icon>Search
         </button>
         <button mat-raised-button style="color:lightgrey; background-color:darkred;margin:5px;">

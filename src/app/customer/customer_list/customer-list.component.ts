@@ -46,9 +46,21 @@ export class CustomerListComponent implements OnInit {
     constructor(
         private service: CustomerService) {
     }
+
+
+    freshDataList(customers: Customer[]) {
+        this.customers = customers;
+
+        this.dataSource = new MatTableDataSource(this.customers);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
  
     ngOnInit(): void {
         this.all_customers()
+
+        this.  search_filter = {};
+        this.list_filter = {};
        
     }
 
@@ -56,13 +68,35 @@ export class CustomerListComponent implements OnInit {
     all_customers (){
         this.service.all_customers().subscribe((customer)=>{
             this.customers = (customer.length > 0) ? [...customer] : null;
-            this.dataSource = new MatTableDataSource(this.customers);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            this.freshDataList(this.customers);
+
+
             console.log(this.customers)
         },
         err=> this.error_message = <any>err 
         );
+    }
+
+    searchCustomers(filters: any ) {
+        if (filters) {
+            this.service.all_customers()
+                .subscribe(customers => {
+                    this.customers = customers;
+                    console.log(this.customers.length)
+                    this.customers = this.customers.filter((customer: Customer[] | any) => {
+                        let match = true;
+
+                        Object.keys(filters).forEach((k) => {
+                            match = match && filters[k] ?
+                                customer[k].toLocaleLowerCase().indexOf(filters[k].toLocaleLowerCase()) > -1 : match;
+                        })
+                        return match;
+                    });
+                    this.freshDataList(customers);
+                },
+                error => this.error_message = <any>error);
+        }
+
     }
 
     
