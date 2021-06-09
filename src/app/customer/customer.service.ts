@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 import { Customer } from './customer';
+import { CustomerListComponent } from './customer_list';
 
 
 @Injectable({
@@ -19,6 +20,28 @@ export class CustomerService {
   all_customers(): Observable<any> {
     return this.http.get(this.api + '/customers');
   }
+
+  get_customerById(id:any): Observable<any> {CustomerListComponent
+    let endPoints = "/customers/" + id;
+    return this.http.get(this.api + endPoints);
+  }
+
+  add_customer(new_customer: Object): Observable<any>  {
+    let endPoints = "/customers"
+    return this.http.post(this.api + endPoints, new_customer);
+  }
+
+  update_customer(new_customer: Object): Observable<any>  {
+    let endPoints = "/customers/1"
+    return this.http.put(this.api + endPoints, new_customer);
+  }
+
+  delete_customer(id:any): Observable<any>  {
+    let endPoints = "/customers/"
+    return this.http.delete(this.api + endPoints);
+  }
+
+
 
 
   initializeCustomer(): Customer {
